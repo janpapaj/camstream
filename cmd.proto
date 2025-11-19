@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package camera;
+
+enum CameraChan {
+    CAMERA_UNKNOWN = 0;
+    CAMERA_HEAT = 1;
+    CAMERA_DAY = 2;
+}
+
+enum CommandType {
+    CMD_UNKNOWN = 0;
+    CMD_ZOOM = 1;
+}
+
+message ZoomCommand {
+    int32 level = 1;
+}
+
+// Top-level command message
+message CommandMessage {
+    CameraChan chan = 1;
+    CommandType type = 2;
+
+    oneof payload {
+        ZoomCommand zoom = 3;
+    }
+}
